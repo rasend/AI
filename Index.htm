@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Мои нейросети</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #050816;
+      --card: #0f172a;
+      --accent: #22c55e;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --btn-bg: #111827;
+      --btn-hover: #1f2937;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d2b47 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(2,6,23,0.98));
+      border-radius: 24px;
+      padding: 28px 22px 24px;
+      box-shadow:
+        0 20px 60px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(148,163,184,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -120px;
+      background:
+        radial-gradient(circle at 0 0, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(34,197,94,0.18), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .card-inner { position: relative; z-index: 1; }
+    .avatar {
+      width: 64px; height: 64px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #22c55e, #16a34a, #0f172a);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 26px;
+      color: #ecfdf5;
+      box-shadow: 0 0 0 3px rgba(15,23,42,1), 0 0 35px rgba(34,197,94,0.55);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 4px;
+      letter-spacing: 0.02em;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.35);
+      background: rgba(15,23,42,0.85);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 8px rgba(34,197,94,0.8);
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      border-radius: var(--radius);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(51,65,85,0.9);
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.16s ease-out;
+      backdrop-filter: blur(10px);
+    }
+    .link-btn:hover {
+      background: var(--btn-hover);
+      border-color: rgba(148,163,184,0.9);
+      transform: translateY(-1px);
+    }
+    .link-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .icon {
+      width: 26px; height: 26px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 600;
+      background: #020617;
+      box-shadow: inset 0 0 0 1px rgba(148,163,184,0.5);
+    }
+    .label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .desc {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .pill {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.7);
+      border: 1px solid rgba(55,65,81,0.9);
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid rgba(30,64,175,0.6);
+      padding-top: 10px;
+      margin-top: 6px;
+    }
+    .footer a {
+      color: #a5b4fc;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 480px) {
+      .card { padding: 22px 16px 18px; }
+      h1 { font-size: 20px; }
+      .link-btn { padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="card-inner">
+      <div class="avatar">AI</div>
+      <h1>Панель нейросетей</h1>
+      <p class="subtitle">Быстрые ссылки на мои основные ИИ‑ассистенты.</p>
+
+      <div class="badge-row">
+        <div class="badge"><span class="badge-dot"></span> Онлайн 24/7</div>
+        <div class="badge">Без VPN где доступно</div>
+      </div>
+
+      <div class="links">
+        <!-- ChatGPT -->
+        <a class="link-btn" href="https://chatgpt.com" target="_blank" rel="noopener">
+          <span class="link-main">
+            <span class="icon">G</span>
+            <span>
+              <div class="label">ChatGPT</div>
+              <div class="desc">Универсальный чат‑ИИ от OpenAI</div>
+            </span>
+          </span>
+          <span class="pill">chatgpt.com</span>
+        </a>
+
+        <!-- Perplexity -->
+        <a class="link-btn" href="https://www.perplexity.ai" target="_blank" rel="noopener">
+          <span class="link-main">
+            <span class="icon">P</span>
+            <span>
+              <div class="label">Perplexity</div>
+              <div class="desc">Поиск с ИИ и ссылками на источники</div>
+            </span>
+          </span>
+          <span class="pill">perplexity.ai</span>
+        </a>
+
+        <!-- Qwen / Qianwen / Qwen (Quin?) — предположим Qwen -->
+        <a class="link-btn" href="https://chat.qwenlm.ai" target="_blank" rel="noopener">
+          <span class="link-main">
+            <span class="icon">Q</span>
+            <span>
+              <div class="label">Qwen</div>
+              <div class="desc">Мультимодальная китайская модель от Alibaba</div>
+            </span>
+          </span>
+          <span class="pill">qwenlm.ai</span>
+        </a>
+
+        <!-- GigaChat -->
+        <a class="link-btn" href="https://gigachat.id.ru" target="_blank" rel="noopener">
+          <span class="link-main">
+            <span class="icon">G</span>
+            <span>
+              <div class="label">GigaChat</div>
+              <div class="desc">Российский ИИ от Сбера</div>
+            </span>
+          </span>
+          <span class="pill">gigachat.id.ru</span>
+        </a>
+
+        <!-- Алиса -->
+        <a class="link-btn" href="https://alice.yandex.ru" target="_blank" rel="noopener">
+          <span class="link-main">
+            <span class="icon">A</span>
+            <span>
+              <div class="label">Алиса</div>
+              <div class="desc">Голосовой ассистент Яндекса</div>
+            </span>
+          </span>
+          <span class="pill">alice.yandex.ru</span>
+        </a>
+
+        <!-- DeepSeek -->
+        <a class="link-btn" href="https://chat.deepseek.com" target="_blank" rel="noopener">
+          <span class="link-main">
+            <span class="icon">D</span>
+            <span>
+              <div class="label">DeepSeek</div>
+              <div class="desc">Мощная модель с режимом рассуждений</div>
+            </span>
+          </span>
+          <span class="pill">deepseek.com</span>
+        </a>
+
+        <!-- Copilot -->
+        <a class="link-btn" href="https://copilot.microsoft.com" target="_blank" rel="noopener">
+          <span class="link-main">
+            <span class="icon">C</span>
+            <span>
+              <div class="label">Microsoft Copilot</div>
+              <div class="desc">ИИ‑ассистент Microsoft (Edge, Windows)</div>
+            </span>
+          </span>
+          <span class="pill">copilot.microsoft.com</span>
+        </a>
+
+        <!-- Gemini -->
+        <a class="link-btn" href="https://gemini.google.com" target="_blank" rel="noopener">
+          <span class="link-main">
+            <span class="icon">G</span>
+            <span>
+              <div class="label">Gemini</div>
+              <div class="desc">ИИ‑модель Google, интеграция с Workspace</div>
+            </span>
+          </span>
+          <span class="pill">gemini.google.com</span>
+        </a>
+      </div>
+
+      <div class="footer">
+        <span>Мой хаб нейросетей</span>
+        <span>обновляется по мере появления новых ИИ</span>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
